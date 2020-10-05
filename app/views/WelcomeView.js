@@ -1,54 +1,61 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, ImageBackground, Text } from "react-native";
+
+import CustomButton from "../components/CustomButton";
+import colors from "../config/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function WelcomeView(prop) {
   return (
-    <View style={styles.viewContainer}>
-      <ImageBackground
-        source={require("../assets/welcome_background.jpg")}
-        style={styles.background}
-      >
-        <Image
-          style={styles.logoImage}
-          source={require("../assets/logo.png")}
-        ></Image>
-        <Text style={styles.slogan}>Sell What You Don't Need</Text>
-      </ImageBackground>
-      <View style={styles.loginButton}></View>
-      <View style={styles.regButton}></View>
-    </View>
+    <ImageBackground
+      blurRadius={10}
+      style={styles.background}
+      source={require("../assets/welcome_background.jpg")}
+    >
+      <MaterialCommunityIcons
+        style={styles.logoImage}
+        name="square-inc-cash"
+        size={100}
+        color="white"
+      ></MaterialCommunityIcons>
+      <Text style={styles.slogan}>$ell What You Don't Need</Text>
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          title="LOGIN"
+          onPress={() => console.log("YOLO")}
+        ></CustomButton>
+        <CustomButton
+          title="REGISTER"
+          onPress={() => console.log("YOLO")}
+        ></CustomButton>
+      </View>
+      {/* <View style={styles.regButton}></View> */}
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  viewContainer: {
-    flex: 1
-  },
   background: {
     flex: 1,
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
     alignItems: "center"
-  },
-  loginButton: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "orange"
-  },
-  regButton: {
-    width: "100%",
-    height: 50,
-    backgroundColor: "black"
+    // backgroundColor: "gray"
   },
   logoImage: {
-    width: 100,
-    height: 100,
-    top: 75
+    position: "absolute",
+    top: 100
   },
   slogan: {
-    color: "white",
-    top: 75,
-    fontSize: 20,
+    fontFamily: "",
+    color: colors.white,
+    position: "absolute",
+    top: 250,
+    fontSize: 15,
     fontWeight: "bold"
+  },
+  buttonContainer: {
+    padding: 20,
+    width: "100%"
   }
 });
 
