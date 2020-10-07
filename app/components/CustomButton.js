@@ -3,26 +3,28 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import colors from "../config/colors";
 
-function CustomButton({ title, onPress }) {
+function CustomButton({ text, onPress, width }) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "black",
+    backgroundColor: colors.main,
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
     borderRadius: 25,
-    margin: 10
+
+    margin: 10,
+    width: "100%",
+    height: 50
   },
   text: {
     fontWeight: "bold",
-    color: colors.white,
+    color: colors.dark,
     fontSize: 15
   }
 });

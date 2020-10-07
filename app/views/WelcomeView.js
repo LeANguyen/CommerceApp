@@ -1,61 +1,71 @@
 import React from "react";
-import { StyleSheet, View, Image, ImageBackground, Text } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Image,
+  ImageBackground,
+  Text
+} from "react-native";
 
 import CustomButton from "../components/CustomButton";
+import CustomText from "../components/CustomText";
+import CustomTextInput from "../components/CustomTextInput";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function WelcomeView(prop) {
   return (
-    <ImageBackground
-      blurRadius={10}
-      style={styles.background}
-      source={require("../assets/welcome_background.jpg")}
-    >
+    <View style={styles.background}>
       <MaterialCommunityIcons
         style={styles.logoImage}
         name="square-inc-cash"
         size={100}
-        color="white"
+        color={colors.main}
       ></MaterialCommunityIcons>
-      <Text style={styles.slogan}>$ell What You Don't Need</Text>
-      <View style={styles.buttonContainer}>
+      <CustomText
+        style={styles.slogan}
+        text="$ell What You Don't Need"
+      ></CustomText>
+      <CustomTextInput style={styles.input}></CustomTextInput>
+      <CustomTextInput style={styles.input}></CustomTextInput>
+      <CustomButton
+        text="LOGIN"
+        onPress={() => console.log("YOLO")}
+      ></CustomButton>
+      <View style={styles.registerContainer}>
+        <CustomText
+          style={styles.slogan}
+          text="Don't Have An Account?"
+        ></CustomText>
         <CustomButton
-          title="LOGIN"
-          onPress={() => console.log("YOLO")}
-        ></CustomButton>
-        <CustomButton
-          title="REGISTER"
+          text="REGISTER"
           onPress={() => console.log("YOLO")}
         ></CustomButton>
       </View>
       {/* <View style={styles.regButton}></View> */}
-    </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center"
-    // backgroundColor: "gray"
+    alignItems: "center",
+    backgroundColor: colors.dark,
+    padding: 20,
+    paddingTop: 40
   },
   logoImage: {
-    position: "absolute",
-    top: 100
+    margin: 10
   },
-  slogan: {
-    fontFamily: "",
-    color: colors.white,
+  registerContainer: {
+    // backgroundColor: "red",
     position: "absolute",
-    top: 250,
-    fontSize: 15,
-    fontWeight: "bold"
-  },
-  buttonContainer: {
-    padding: 20,
-    width: "100%"
+    bottom: 20,
+    width: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center"
   }
 });
 

@@ -23,6 +23,7 @@ import {
 import WelcomeView from "./app/views/WelcomeView";
 import ViewImageView from "./app/views/ViewImageView";
 import CustomCard from "./app/components/CustomCard";
+import colors from "./app/config/colors";
 
 export default function App() {
   console.log("App started");
@@ -31,14 +32,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CustomCard
-        title="AAA"
-        subTitle="BBB"
-        image={require("./app/assets/icon.png")}
+        title="Black, White and Pink Shoe - Model 1"
+        subTitle="$100"
+        image={require("./app/assets/item1.jpg")}
       ></CustomCard>
       <CustomCard
-        title="AAA"
-        subTitle="BBB"
-        image={require("./app/assets/welcome_background.jpg")}
+        title="Black, White and Pink Shoe - Model 2"
+        subTitle="$200"
+        image={require("./app/assets/item2.jpg")}
       ></CustomCard>
     </View>
   );
@@ -47,9 +48,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
-    marginTop: 50,
-    backgroundColor: "orange"
+    backgroundColor: colors.dark,
+    padding: 20,
+    paddingTop: 40
+    // margin: 20,
+    // marginTop: 50
+    // backgroundColor: "orange"
     // alignItems: "center"
     // justifyContent: "center"
   }

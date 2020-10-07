@@ -1,7 +1,7 @@
 export default {
-  primary: "",
-  secondary: "",
-  black: "black",
-  white: "white",
-  gray: "gray"
+  dark: "black",
+  darklight: "dimgray",
+  light: "white",
+  main: "hotpink",
+  secondary: "darkcyan"
 };
