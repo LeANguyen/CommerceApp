@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,8 +10,11 @@ import {
   Alert,
   View,
   SafeAreaView,
-  Dimensions
+  Dimensions,
+  FlatList
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 import { Component } from "react";
 
@@ -21,28 +24,54 @@ import {
 } from "@react-native-community/hooks";
 
 import WelcomeView from "./app/views/WelcomeView";
-import ViewImageView from "./app/views/ViewImageView";
-import CustomCard from "./app/components/CustomCard";
+import ImageDetailView from "./app/views/ImageDetailView";
+import ItemListView from "./app/views/ItemListView";
+import CustomCard from "./app/components/list/CustomCard";
+import MessageListView from "./app/views/MessageListView";
+import AccountView from "./app/views/AccountView";
+import ListingView from "./app/views/ListingView";
 import colors from "./app/config/colors";
+import CreateAccountView from "./app/views/CreateAccountView";
+import CreateItemView from "./app/views/CreateItemView";
+import CountryPickerView from "./app/views/CountryPickerView";
+import CustomViewContainer from "./app/components/CustomViewContainer";
+import CustomButton from "./app/components/CustomButton";
+import CustomText from "./app/components/CustomText";
+import CustomImagePicker from "./app/components/image_picker/CustomImagePicker";
+import CustomImagePickerItem from "./app/components/image_picker/CustomImagePickerItem";
 
+// const subImages = [{ uri: null }];
 export default function App() {
   console.log("App started");
+
+  const requestPermission = async () => {
+    const result = Permissions.askAsync(
+      Permissions.CAMERA_ROLL,
+      Permissions.LOCATION
+    );
+    // const result = await ImagePicker.requestCameraPermissionsAsync();
+    if (!result.granted) {
+      alert("Permission not granted");
+    }
+  };
+
+  // useEffect(() => {
+  //   requestPermission();
+  // }, []);
+
+  // return (
+  //   <CustomViewContainer>
+  //   </CustomViewContainer>
+  // );
   // return <WelcomeView></WelcomeView>;
-  // return <ViewImageView></ViewImageView>;
-  return (
-    <View style={styles.container}>
-      <CustomCard
-        title="Black, White and Pink Shoe - Model 1"
-        subTitle="$100"
-        image={require("./app/assets/item1.jpg")}
-      ></CustomCard>
-      <CustomCard
-        title="Black, White and Pink Shoe - Model 2"
-        subTitle="$200"
-        image={require("./app/assets/item2.jpg")}
-      ></CustomCard>
-    </View>
-  );
+  // return <CreateAccountView></CreateAccountView>;
+  return <CreateItemView></CreateItemView>;
+  // return <ImageDetailView></ImageDetailView>;
+  // return <ItemListView></ItemListView>;
+  // return <MessageListView></MessageListView>;
+  // return <AccountView></AccountView>;
+  // return <ListingView></ListingView>;
+  // return <CountryPickerView></CountryPickerView>;
 }
 
 const styles = StyleSheet.create({

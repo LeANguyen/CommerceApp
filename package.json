@@ -8,13 +8,21 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@fawazahmed/react-native-read-more": "^1.0.8",
     "@react-native-community/hooks": "^2.6.0",
     "expo": "^39.0.3",
+    "expo-constants": "^9.2.0",
     "expo-status-bar": "~1.0.2",
+    "formik": "^2.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
-    "react-native-web": "~0.13.12"
+    "react-native-country-picker-modal": "^2.0.0",
+    "react-native-swipeable-flat-list": "^0.1.2",
+    "react-native-web": "~0.13.12",
+    "yup": "^0.29.3",
+    "expo-image-picker": "~9.1.0",
+    "expo-permissions": "~9.3.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
