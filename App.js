@@ -30,6 +30,8 @@ import CustomCard from "./app/components/list/CustomCard";
 import MessageListView from "./app/views/MessageListView";
 import AccountView from "./app/views/AccountView";
 import ListingView from "./app/views/ListingView";
+import ItemTestView from "./app/views/ItemTestView";
+
 import colors from "./app/config/colors";
 import CreateAccountView from "./app/views/CreateAccountView";
 import CreateItemView from "./app/views/CreateItemView";
@@ -39,6 +41,12 @@ import CustomButton from "./app/components/CustomButton";
 import CustomText from "./app/components/CustomText";
 import CustomImagePicker from "./app/components/image_picker/CustomImagePicker";
 import CustomImagePickerItem from "./app/components/image_picker/CustomImagePickerItem";
+
+import {
+  CustomForm,
+  CustomFormTextInput,
+  SubmitButton
+} from "./app/components/form";
 
 // const subImages = [{ uri: null }];
 export default function App() {
@@ -65,13 +73,14 @@ export default function App() {
   // );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
-  return <CreateItemView></CreateItemView>;
+  // return <CreateItemView></CreateItemView>;
   // return <ImageDetailView></ImageDetailView>;
   // return <ItemListView></ItemListView>;
   // return <MessageListView></MessageListView>;
   // return <AccountView></AccountView>;
   // return <ListingView></ListingView>;
   // return <CountryPickerView></CountryPickerView>;
+  return <ItemTestView></ItemTestView>;
 }
 
 const styles = StyleSheet.create({

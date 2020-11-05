@@ -11,6 +11,7 @@ import CustomTextInput from "../components/CustomTextInput";
 import ErrorMessage from "../components/ErrorMessage";
 import CustomPicker from "../components/picker/CustomPicker";
 import CustomImagePicker from "../components/image_picker/CustomImagePicker";
+import { SubmitButton } from "../components/form";
 
 const categories = [
   {
@@ -62,7 +63,8 @@ const validationSchema = Yup.object().shape({
     .required()
     .min(2)
     .max(6)
-    .label("Price")
+    .label("Price"),
+  images: Yup.array().min(1, "Please select at least one image.")
 });
 
 function CreateItemView() {

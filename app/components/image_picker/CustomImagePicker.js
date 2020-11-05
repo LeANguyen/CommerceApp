@@ -11,22 +11,14 @@ import { seagreen } from "color-name";
 function CustomImagePicker(props) {
   const [images, setImages] = useState([]);
 
-  const space = () => {
-    return (
-      <View
-        style={{ height: 50, width: 10, backgroundColor: colors.mainLight }}
-      />
-    );
-  };
-
   const selectImage = async () => {
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        quality: 0.5
+        mediaTypes: ImagePicker.MediaTypeOptions.Images
+        // quality: 0.5
       });
       if (!result.cancelled) {
-        setImages([...images, { uri: result.uri }].reverse());
+        setImages([{ uri: result.uri }, ...images]);
       }
     } catch (error) {
       console.log(error);
@@ -70,7 +62,6 @@ function CustomImagePicker(props) {
           ></CustomImagePickerItem>
         )}
         style={styles.menuList}
-        // ItemSeparatorComponent={space}
       ></FlatList>
     </View>
   );
@@ -84,9 +75,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: colors.dim,
-    // alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
+    paddingHorizontal: 5
   },
   listSeperator: {
     margin: 10,

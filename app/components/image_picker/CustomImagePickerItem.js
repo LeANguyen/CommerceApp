@@ -5,14 +5,15 @@ import CustomIcon from "../CustomIcon";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function CustomImagePickerItem({ _imageUri, _onPress }) {
-  // var onPress = () => {};
-  // if (!_imageUri) {
-  //   onPress = () => {
-  //     this.setState({
-  //       data: this.state.data.filter(item => item.id !== id)
-  //     });
-  //   };
-  // }
+  var onPress = () => {};
+  if (!_imageUri) {
+    onPress = () => {
+      this.setState({
+        data: this.state.data.filter(item => item.id !== id)
+      });
+    };
+  }
+
   return (
     <TouchableOpacity style={styles.container} onPress={_onPress}>
       {!_imageUri && (
@@ -41,7 +42,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 100,
     height: 100,
-    margin: 10
+    margin: 10,
+    marginHorizontal: 5
   }
 });
 
