@@ -8,57 +8,55 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import { seagreen } from "color-name";
 
-function CustomImagePicker(props) {
-  const [images, setImages] = useState([]);
+function CustomImagePicker({ _imageUris, _onAddImage, _onDeleteImage }) {
+  // const [images, setImages] = useState([]);
 
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images
-        // quality: 0.5
-      });
-      if (!result.cancelled) {
-        setImages([{ uri: result.uri }, ...images]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const addImage = async () => {
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.Images
+  //       // quality: 0.5
+  //     });
+  //     if (!result.cancelled) {
+  //       setImages([{ uri: result.uri }, ...images]);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const deleteImage = imageUri => {
-    Alert.alert("Delete", "Are you sure you want to delete this image?", [
-      {
-        text: "OK",
-        onPress: () => {
-          // const subImages = images;
-          setImages(images.filter(item => item.uri !== imageUri));
-        }
-      },
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel"
-      }
-    ]);
-  };
+  // const deleteImage = imageUri => {
+  //   Alert.alert("Delete", "Are you sure you want to delete this image?", [
+  //     {
+  //       text: "OK",
+  //       onPress: () => {
+  //         // const subImages = images;
+  //         setImages(images.filter(item => item.uri !== imageUri));
+  //       }
+  //     },
+  //     {
+  //       text: "Cancel",
+  //       onPress: () => console.log("Cancel Pressed"),
+  //       style: "cancel"
+  //     }
+  //   ]);
+  // };
 
   return (
     <View style={styles.container}>
       <CustomImagePickerItem
-        _onPress={() => {
-          selectImage();
-        }}
+        _onChangeImage={_onAddImage}
+        // _onPress={_onAddImage}
       ></CustomImagePickerItem>
       <FlatList
-        data={images}
-        keyExtractor={images => images.uri}
+        data={_imageUris}
+        keyExtractor={_imageUris => _imageUris}
         horizontal={true}
         renderItem={({ item }) => (
           <CustomImagePickerItem
-            _imageUri={item.uri}
-            _onPress={() => {
-              deleteImage(item.uri);
-            }}
+            _imageUri={item}
+            _onChangeImage={_onDeleteImage}
+            // _onPress={_onDeleteImage}
           ></CustomImagePickerItem>
         )}
         style={styles.menuList}
@@ -69,10 +67,8 @@ function CustomImagePicker(props) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     backgroundColor: colors.mainLight,
-    margin: 10,
-    borderRadius: 10,
+    marginBottom: 10,
     borderWidth: 0.5,
     borderColor: colors.dim,
     flexDirection: "row",

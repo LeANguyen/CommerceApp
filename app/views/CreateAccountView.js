@@ -28,7 +28,10 @@ function CreateAccountView() {
 
   return (
     <CustomViewContainer _style={styles.viewContainer}>
-      <CustomText _text="Create Account"></CustomText>
+      <CustomText
+        _text="Create Account"
+        _style={{ textAlign: "center" }}
+      ></CustomText>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={values => console.log(values.email, values.password)}

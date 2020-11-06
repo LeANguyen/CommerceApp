@@ -17,15 +17,15 @@ function CustomFormTextInput({
   return (
     <>
       <CustomTextInput
-        // onBlur={() => setFieldTouched(_name)}
+        _onBlur={() => setFieldTouched(_name)}
+        _onChangeText={handleChange(_name)}
         _iconName={_iconName}
         _isSecure={_isSecure}
         _keyboardType={_keyboardType}
         _multiline={_multiline}
-        _onChangeText={handleChange(_name)}
         _placeholder={_placeholder}
       />
-      <ErrorMessage _error={errors[_name]} visible={touched[_name]} />
+      <ErrorMessage _error={errors[_name]} _isVisible={touched[_name]} />
     </>
   );
 }

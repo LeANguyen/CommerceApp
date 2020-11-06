@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import * as Yup from "yup";
@@ -68,13 +68,27 @@ const validationSchema = Yup.object().shape({
 });
 
 function CreateItemView() {
+  const [imageUris, setImageUris] = useState([]);
+
+  const onAddImage = imageUri => {
+    setImageUris([imageUri, ...imageUris]);
+  };
+
+  const onDeleteImage = imageUri => {
+    setImageUris(imageUris.filter(item => item !== imageUri));
+  };
+
   return (
     <CustomViewContainer>
-      <CustomText
+      {/* <CustomText
         _text="Create Item"
         _style={{ fontWeight: "bold" }}
-      ></CustomText>
-      <CustomImagePicker></CustomImagePicker>
+      ></CustomText> */}
+      <CustomImagePicker
+        _imageUris={imageUris}
+        _onAddImage={onAddImage}
+        _onDeleteImage={onDeleteImage}
+      ></CustomImagePicker>
       <Formik
         initialValues={{ name: "", price: "" }}
         onSubmit={values => console.log(values.email, values.password)}

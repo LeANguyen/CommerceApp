@@ -26,15 +26,16 @@ const validationSchema = Yup.object().shape({
 function WelcomeView(prop) {
   return (
     <CustomViewContainer _style={styles.viewContainer}>
-      <MaterialCommunityIcons
-        style={styles.logoImage}
-        name="cash-usd"
-        size={100}
-        color={colors.red}
-      ></MaterialCommunityIcons>
+      <View style={styles.logoContainer}>
+        <MaterialCommunityIcons
+          name="cash-usd"
+          size={100}
+          color={colors.red}
+        ></MaterialCommunityIcons>
+      </View>
       <CustomText
         _text="$ell What You Don't Need"
-        _style={{ fontSize: 12 }}
+        _style={{ textAlign: "center" }}
       ></CustomText>
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -74,7 +75,7 @@ function WelcomeView(prop) {
       <View style={styles.registerContainer}>
         <CustomText
           _text="Don't Have An Account?"
-          _style={{ fontSize: 12 }}
+          _style={{ textAlign: "center" }}
         ></CustomText>
         <CustomButton
           _text="Create Account"
@@ -98,15 +99,16 @@ function WelcomeView(prop) {
 
 const styles = StyleSheet.create({
   viewContainer: {},
-  logoImage: {
-    margin: 10
+  logoContainer: {
+    alignItems: "center"
   },
   registerContainer: {
     position: "absolute",
     bottom: 20,
     width: "100%",
     justifyContent: "flex-end",
-    alignItems: "center"
+    alignItems: "stretch",
+    backgroundColor: colors.mainLight
   },
   googleButton: {
     backgroundColor: "darkred"

@@ -9,6 +9,7 @@ function CustomTextInput({
   _isSecure = false,
   _iconName,
   _onChangeText,
+  _onBLur,
   _multiline = false,
   _style
 }) {
@@ -28,6 +29,7 @@ function CustomTextInput({
         secureTextEntry={_isSecure}
         keyboardType={_keyboardType}
         onChangeText={_onChangeText}
+        onBlur={_onBLur}
         multiline={_multiline}
       ></TextInput>
     </View>
@@ -36,8 +38,8 @@ function CustomTextInput({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     margin: 10,
+    marginHorizontal: 20,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -48,15 +50,14 @@ const styles = StyleSheet.create({
     borderColor: colors.dim
   },
   icon: {
-    margin: 10,
-    marginRight: 0
+    margin: 10
   },
   text: {
     color: colors.mainDark,
     fontFamily: Platform.OS === "android" ? "monospace" : "Avenir",
     fontSize: 12,
     flex: 1,
-    margin: 10
+    marginVertical: 10
   }
 });
 

@@ -12,7 +12,7 @@ import { textStyles } from "../config/styles";
 
 function CustomText({ _text, _style, _numberOfLines }) {
   return (
-    <Text style={[textStyles.secondary, _style]} numberOfLines={_numberOfLines}>
+    <Text style={[styles.text, _style]} numberOfLines={_numberOfLines}>
       {_text}
     </Text>
   );
@@ -21,7 +21,7 @@ function CustomText({ _text, _style, _numberOfLines }) {
 const styles = StyleSheet.create({
   text: {
     fontFamily: Platform.OS === "android" ? "monospace" : "Avenir",
-    color: colors.dim,
+    color: colors.mainDark,
     fontSize: 12,
     margin: 10
   }

@@ -75,7 +75,7 @@ export default function App() {
   // return <CreateAccountView></CreateAccountView>;
   // return <CreateItemView></CreateItemView>;
   // return <ImageDetailView></ImageDetailView>;
-  // return <ItemListView></ItemListView>;
+  return <ItemListView></ItemListView>;
   // return <MessageListView></MessageListView>;
   // return <AccountView></AccountView>;
   // return <ListingView></ListingView>;

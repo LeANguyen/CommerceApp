@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 const styles = StyleSheet.create({});
+
 const textStyles = StyleSheet.create({
   primary: {
     color: colors.mainDark,

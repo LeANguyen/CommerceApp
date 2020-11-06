@@ -89,8 +89,8 @@ function CustomPicker({ _items }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    margin: 10
+    margin: 10,
+    marginHorizontal: 20
   },
   pickerContainer: {
     width: "100%",
@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     color: colors.dim,
     flex: 1,
     fontSize: 12,
-    fontWeight: "normal"
+    fontWeight: "normal",
+    textAlign: "left"
   },
   closeIcon: {
     position: "absolute",

@@ -64,7 +64,6 @@ const items = [
 function ItemListView(prop) {
   return (
     <CustomViewContainer _style={styles.viewContainer}>
-      <CustomText _text="My List"></CustomText>
       <FlatList
         data={items}
         keyExtractor={items => items.name}

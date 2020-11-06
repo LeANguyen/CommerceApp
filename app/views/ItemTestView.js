@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import * as Yup from "yup";
@@ -17,6 +17,7 @@ import {
   CustomFormTextInput,
   SubmitButton
 } from "../components/form";
+import CustomFormImagePicker from "../components/form/CustomFormImagePicker";
 
 const categories = [
   {
@@ -73,14 +74,23 @@ const validationSchema = Yup.object().shape({
 });
 
 function TestItemView() {
+  // const [imageUris, setImageUris] = useState([]);
+
+  // const onAddImage = imageUri => {
+  //   setImageUris([imageUri, ...imageUris]);
+  // };
+
+  // const onDeleteImage = imageUri => {
+  //   setImageUris(imageUris.filter(item => item !== imageUri));
+  // };
   return (
     <CustomViewContainer>
       <CustomForm
         _validationSchema={validationSchema}
-        _initialValues={{ name: "", price: "", description: "" }}
+        _initialValues={{ name: "", price: "", description: "", images: [] }}
         _onSubmit={values => console.log(values)}
       >
-        <CustomText _text={"Create Item"}></CustomText>
+        <CustomFormImagePicker name={"images"}></CustomFormImagePicker>
         <CustomFormTextInput
           _placeholder="Item Name"
           _style={styles.input}
@@ -101,6 +111,7 @@ function TestItemView() {
           _iconName={"rename-box"}
           _keyboardType="email-address"
           _name={"description"}
+          _multiline={true}
         ></CustomFormTextInput>
         <SubmitButton _text="Create Item"></SubmitButton>
       </CustomForm>

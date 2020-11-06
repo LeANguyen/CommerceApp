@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
 import Constants from "expo-constants";
 
 import colors from "../config/colors";
@@ -7,6 +7,7 @@ import colors from "../config/colors";
 function CustomViewContainer({ children, _style }) {
   return (
     <SafeAreaView style={[styles.screen, _style]}>
+      {/* <View style={[styles.view, _style]}>{children}</View> */}
       {/* <ScrollView style={styles.scroll}>{children}</ScrollView> */}
       {children}
     </SafeAreaView>
@@ -16,14 +17,13 @@ function CustomViewContainer({ children, _style }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    // width: "100%",
-    // height: "100%",
     backgroundColor: colors.secondaryLight,
-    alignItems: "center",
-
-    padding: 20,
     paddingTop: Constants.statusBarHeight
-    // paddingTop: 40
+  },
+  view: {
+    flex: 1,
+    alignItems: "stretch",
+    backgroundColor: colors.green
   },
   scroll: {
     width: "100%",
