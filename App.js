@@ -49,26 +49,57 @@ import {
 } from "./app/components/form";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: colors.red },
+      headerTintColor: "rgb(255, 255, 255)"
+    }}
+  >
     <Stack.Screen name="Tweets" component={Tweets}></Stack.Screen>
-    <Stack.Screen name="TweetDetails" component={TweetDetails}></Stack.Screen>
+    <Stack.Screen
+      name="TweetDetails"
+      component={TweetDetails}
+      options={({ route }) => ({
+        title: route.params.id,
+        headerStyle: { backgroundColor: colors.red },
+        headerTintColor: "rgb(255, 255, 255)"
+      })}
+    ></Stack.Screen>
   </Stack.Navigator>
 );
-const Tweets = () => (
-  <CustomViewContainer _style={{ backgroundColor: colors.red }}>
+
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <CustomButton
+      _text="Go Go"
+      _onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
+    ></CustomButton>
+  );
+};
+
+const Tweets = ({ navigation }) => (
+  <CustomViewContainer>
     <CustomText _text="Tweets"></CustomText>
+    {/* <CustomButton
+      _text="GO"
+      _onPress={() => {
+        navigation.navigate("TweetDetails");
+      }}
+    ></CustomButton> */}
+    <Link></Link>
   </CustomViewContainer>
 );
 
-const TweetDetails = () => {
+const TweetDetails = ({ route }) => (
   <CustomViewContainer>
-    <CustomText _text="TweetDetails"></CustomText>
-  </CustomViewContainer>;
-};
+    <CustomText _text={"Tweet Details " + route.params.id}></CustomText>
+  </CustomViewContainer>
+);
 
 export default function App() {
   console.log("App started");
