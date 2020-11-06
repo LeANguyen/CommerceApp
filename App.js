@@ -30,11 +30,12 @@ import CustomCard from "./app/components/list/CustomCard";
 import MessageListView from "./app/views/MessageListView";
 import AccountView from "./app/views/AccountView";
 import ListingView from "./app/views/ListingView";
-
-import colors from "./app/config/colors";
 import CreateAccountView from "./app/views/CreateAccountView";
 import CreateItemView from "./app/views/CreateItemView";
 import CountryPickerView from "./app/views/CountryPickerView";
+
+import colors from "./app/config/colors";
+
 import CustomViewContainer from "./app/components/CustomViewContainer";
 import CustomButton from "./app/components/CustomButton";
 import CustomText from "./app/components/CustomText";
@@ -47,32 +48,39 @@ import {
   SubmitButton
 } from "./app/components/form";
 
-// const subImages = [{ uri: null }];
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Stack = createStackNavigator();
+const StackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Tweets" component={Tweets}></Stack.Screen>
+    <Stack.Screen name="TweetDetails" component={TweetDetails}></Stack.Screen>
+  </Stack.Navigator>
+);
+const Tweets = () => (
+  <CustomViewContainer _style={{ backgroundColor: colors.red }}>
+    <CustomText _text="Tweets"></CustomText>
+  </CustomViewContainer>
+);
+
+const TweetDetails = () => {
+  <CustomViewContainer>
+    <CustomText _text="TweetDetails"></CustomText>
+  </CustomViewContainer>;
+};
+
 export default function App() {
   console.log("App started");
 
-  const requestPermission = async () => {
-    const result = Permissions.askAsync(
-      Permissions.CAMERA_ROLL,
-      Permissions.LOCATION
-    );
-    // const result = await ImagePicker.requestCameraPermissionsAsync();
-    if (!result.granted) {
-      alert("Permission not granted");
-    }
-  };
-
-  // useEffect(() => {
-  //   requestPermission();
-  // }, []);
-
-  // return (
-  //   <CustomViewContainer>
-  //   </CustomViewContainer>
-  // );
+  return (
+    <NavigationContainer>
+      <StackNavigator></StackNavigator>
+    </NavigationContainer>
+  );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
-  return <CreateItemView></CreateItemView>;
+  // return <CreateItemView></CreateItemView>;
   // return <ImageDetailView></ImageDetailView>;
   // return <ItemListView></ItemListView>;
   // return <MessageListView></MessageListView>;
