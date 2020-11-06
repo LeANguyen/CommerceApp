@@ -30,7 +30,6 @@ import CustomCard from "./app/components/list/CustomCard";
 import MessageListView from "./app/views/MessageListView";
 import AccountView from "./app/views/AccountView";
 import ListingView from "./app/views/ListingView";
-import ItemTestView from "./app/views/ItemTestView";
 
 import colors from "./app/config/colors";
 import CreateAccountView from "./app/views/CreateAccountView";
@@ -73,14 +72,14 @@ export default function App() {
   // );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
-  // return <CreateItemView></CreateItemView>;
+  return <CreateItemView></CreateItemView>;
   // return <ImageDetailView></ImageDetailView>;
-  return <ItemListView></ItemListView>;
+  // return <ItemListView></ItemListView>;
   // return <MessageListView></MessageListView>;
   // return <AccountView></AccountView>;
   // return <ListingView></ListingView>;
   // return <CountryPickerView></CountryPickerView>;
-  return <ItemTestView></ItemTestView>;
+  // return <ItemTestView></ItemTestView>;
 }
 
 const styles = StyleSheet.create({

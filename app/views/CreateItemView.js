@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import * as Yup from "yup";
-import { Formik } from "formik";
 
 import colors from "../config/colors";
-import CustomButton from "../components/CustomButton";
-import CustomText from "../components/CustomText";
-import CustomTextInput from "../components/CustomTextInput";
-import ErrorMessage from "../components/ErrorMessage";
 import CustomPicker from "../components/picker/CustomPicker";
-import CustomImagePicker from "../components/image_picker/CustomImagePicker";
-import { SubmitButton } from "../components/form";
+
+import {
+  CustomForm,
+  CustomFormTextInput,
+  SubmitButton
+} from "../components/form";
+import CustomFormImagePicker from "../components/form/CustomFormImagePicker";
+import * as Permissions from "expo-permissions";
+
+import useLocation from "../hooks/useLocation";
 
 const categories = [
   {
@@ -68,80 +71,48 @@ const validationSchema = Yup.object().shape({
 });
 
 function CreateItemView() {
-  const [imageUris, setImageUris] = useState([]);
-
-  const onAddImage = imageUri => {
-    setImageUris([imageUri, ...imageUris]);
-  };
-
-  const onDeleteImage = imageUri => {
-    setImageUris(imageUris.filter(item => item !== imageUri));
-  };
+  const location = useLocation();
+  console.log(location);
 
   return (
     <CustomViewContainer>
-      {/* <CustomText
-        _text="Create Item"
-        _style={{ fontWeight: "bold" }}
-      ></CustomText> */}
-      <CustomImagePicker
-        _imageUris={imageUris}
-        _onAddImage={onAddImage}
-        _onDeleteImage={onDeleteImage}
-      ></CustomImagePicker>
-      <Formik
-        initialValues={{ name: "", price: "" }}
-        onSubmit={values => console.log(values.email, values.password)}
-        validationSchema={validationSchema}
+      <CustomForm
+        _validationSchema={validationSchema}
+        _initialValues={{ name: "", price: "", description: "", images: [] }}
+        _onSubmit={values => console.log(values)}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting
-          /* and other goodies */
-        }) => (
-          <>
-            <CustomTextInput
-              _placeholder="Item Name"
-              _style={styles.input}
-              _iconName={"tag"}
-              _onChangeText={handleChange("name")}
-              _keyboardType="email-address"
-            ></CustomTextInput>
-            <ErrorMessage _error={errors.name}></ErrorMessage>
-            <CustomTextInput
-              _placeholder="Price"
-              _style={styles.input}
-              _iconName={"cash-usd"}
-              _onChangeText={handleChange("price")}
-              _keyboardType="numeric"
-            ></CustomTextInput>
-            <ErrorMessage _error={errors.price}></ErrorMessage>
-            <CustomTextInput
-              _placeholder="Description"
-              _style={styles.input}
-              _iconName={"rename-box"}
-              _multiline={true}
-            ></CustomTextInput>
-            <ErrorMessage _error={errors.password}></ErrorMessage>
-            <CustomPicker
-              _isSecure={true}
-              _style={styles.input}
-              _iconName={categories[0].icon}
-              _title={categories[0].label}
-              _items={categories}
-            ></CustomPicker>
-            <CustomButton
-              _text="Create Item"
-              _onPress={handleSubmit}
-            ></CustomButton>
-          </>
-        )}
-      </Formik>
+        <CustomFormImagePicker name={"images"}></CustomFormImagePicker>
+        <CustomFormTextInput
+          _placeholder="Item Name"
+          _style={styles.input}
+          _iconName={"tag"}
+          _keyboardType="email-address"
+          _name={"name"}
+        ></CustomFormTextInput>
+        <CustomFormTextInput
+          _placeholder="Price"
+          _style={styles.input}
+          _iconName={"cash-usd"}
+          _keyboardType="numeric"
+          _name={"price"}
+        ></CustomFormTextInput>
+        <CustomFormTextInput
+          _placeholder="Description"
+          _style={styles.input}
+          _iconName={"rename-box"}
+          _keyboardType="email-address"
+          _name={"description"}
+          _multiline={true}
+        ></CustomFormTextInput>
+        <CustomPicker
+          _isSecure={true}
+          _style={styles.input}
+          _iconName={categories[0].icon}
+          _title={categories[0].label}
+          _items={categories}
+        ></CustomPicker>
+        <SubmitButton _text="Create Item"></SubmitButton>
+      </CustomForm>
     </CustomViewContainer>
   );
 }

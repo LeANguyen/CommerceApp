@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
-import CustomTextInput from "../components/CustomTextInput";
-import CustomButton from "../components/CustomButton";
 import CustomText from "../components/CustomText";
-import ErrorMessage from "../components/ErrorMessage";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
 import * as Yup from "yup";
-import { Formik } from "formik";
+
+import {
+  CustomForm,
+  CustomFormTextInput,
+  SubmitButton
+} from "../components/form";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,43 +33,25 @@ function CreateAccountView() {
         _text="Create Account"
         _style={{ textAlign: "center" }}
       ></CustomText>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={values => console.log(values.email, values.password)}
-        validationSchema={validationSchema}
+      <CustomForm
+        _validationSchema={validationSchema}
+        _initialValues={{ email: "", password: "" }}
+        _onSubmit={values => console.log(values)}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting
-          /* and other goodies */
-        }) => (
-          <>
-            <CustomTextInput
-              _placeholder="Email"
-              _iconName={"email"}
-              _onChangeText={handleChange("email")}
-              _keyboardType="email-address"
-            ></CustomTextInput>
-            <ErrorMessage _error={errors.email}></ErrorMessage>
-            <CustomTextInput
-              _placeholder="Password"
-              _isSecure={true}
-              _iconName={"lock-question"}
-              _onChangeText={handleChange("password")}
-            ></CustomTextInput>
-            <ErrorMessage _error={errors.password}></ErrorMessage>
-            <CustomButton
-              _text="Create Account"
-              _onPress={handleSubmit}
-            ></CustomButton>
-          </>
-        )}
-      </Formik>
+        <CustomFormTextInput
+          _name={"email"}
+          _placeholder="Email"
+          _iconName={"email"}
+          _keyboardType="email-address"
+        ></CustomFormTextInput>
+        <CustomFormTextInput
+          _name={"password"}
+          _placeholder="Password"
+          _isSecure={true}
+          _iconName={"lock-question"}
+        ></CustomFormTextInput>
+        <SubmitButton _text="Create Item"></SubmitButton>
+      </CustomForm>
     </CustomViewContainer>
   );
 }
