@@ -16,7 +16,7 @@ function CustomCell({ style, _title, _subTitle, _iconName, _image, _onPress }) {
   console.log(_iconName);
   return (
     <TouchableOpacity
-      _onPress={_onPress}
+      onPress={_onPress}
       style={[{ backgroundColor: colors.secondaryLight }]}
     >
       <View style={[styles.container, style]}>

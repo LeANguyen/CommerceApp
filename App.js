@@ -49,8 +49,14 @@ import {
 } from "./app/components/form";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+// STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator
@@ -85,12 +91,6 @@ const Link = () => {
 const Tweets = ({ navigation }) => (
   <CustomViewContainer>
     <CustomText _text="Tweets"></CustomText>
-    {/* <CustomButton
-      _text="GO"
-      _onPress={() => {
-        navigation.navigate("TweetDetails");
-      }}
-    ></CustomButton> */}
     <Link></Link>
   </CustomViewContainer>
 );
@@ -100,13 +100,84 @@ const TweetDetails = ({ route }) => (
     <CustomText _text={"Tweet Details " + route.params.id}></CustomText>
   </CustomViewContainer>
 );
+// STACK STACK STACK STACK STACK STACK
+
+// TAB TAB TAB TAB TAB TAB TAB
+const Tab = createBottomTabNavigator();
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        activeBackgroundColor: colors.red,
+        activeTintColor: "white",
+        inactiveBackgroundColor: colors.mainLight,
+        inactiveTintColor: colors.mainDark
+      }}
+    >
+      <Tab.Screen
+        name="Tweet"
+        component={StackNavigator}
+        options={{
+          tabBarIcon: ({ size, color }) => {
+            return (
+              <MaterialCommunityIcons
+                name="email"
+                size={size}
+                color={color}
+              ></MaterialCommunityIcons>
+            );
+          }
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ size, color }) => {
+            return (
+              <MaterialCommunityIcons
+                name="tag"
+                size={size}
+                color={color}
+              ></MaterialCommunityIcons>
+            );
+          }
+        }}
+      />
+      <Tab.Screen name="Setting" component={Setting} />
+    </Tab.Navigator>
+  );
+}
+
+const Home = ({ navigation }) => (
+  <CustomViewContainer>
+    <CustomText _text="Home"></CustomText>
+  </CustomViewContainer>
+);
+
+const Setting = ({ route }) => (
+  <CustomViewContainer>
+    <CustomText _text={"Setting"}></CustomText>
+  </CustomViewContainer>
+);
 
 export default function App() {
   console.log("App started");
 
   return (
+    // <NavigationContainer>
+    //   <StackNavigator></StackNavigator>
+    // </NavigationContainer>
+
+    // <NavigationContainer>
+    //   <MyTabs></MyTabs>
+    // </NavigationContainer>
+
+    // <NavigationContainer theme={navigationTheme}>
+    //   <AuthNavigator></AuthNavigator>
+    // </NavigationContainer>
     <NavigationContainer>
-      <StackNavigator></StackNavigator>
+      <AppNavigator></AppNavigator>
     </NavigationContainer>
   );
   // return <WelcomeView></WelcomeView>;

@@ -13,7 +13,8 @@ const menuItems = [
       name: "format-list-bulleted",
       size: 70,
       backgroundColor: colors.blue
-    }
+    },
+    targetView: ""
   },
   {
     title: "My Messages",
@@ -21,7 +22,8 @@ const menuItems = [
       name: "email",
       size: 70,
       backgroundColor: colors.green
-    }
+    },
+    targetView: "MessageList"
   },
   {
     title: "Log Out",
@@ -29,11 +31,12 @@ const menuItems = [
       name: "logout",
       size: 70,
       backgroundColor: colors.red
-    }
+    },
+    targetView: ""
   }
 ];
 
-function AccountView(props) {
+function AccountView({ navigation }) {
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.container}>
@@ -49,13 +52,13 @@ function AccountView(props) {
           data={menuItems}
           keyExtractor={menuItems => menuItems.title}
           renderItem={({ item }) => (
-            <MessageListCell
+            <CustomListItem
               _title={item.title}
               _iconName={item.icon.name}
               _onPress={() => {
-                console.log(item);
+                navigation.navigate(item.targetView);
               }}
-            ></MessageListCell>
+            ></CustomListItem>
           )}
           style={styles.menuList}
         ></FlatList>

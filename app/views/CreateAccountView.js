@@ -13,6 +13,9 @@ import {
 } from "../components/form";
 
 const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required()
+    .label("Name"),
   email: Yup.string()
     .required()
     .email()
@@ -29,15 +32,16 @@ function CreateAccountView() {
 
   return (
     <CustomViewContainer _style={styles.viewContainer}>
-      <CustomText
-        _text="Create Account"
-        _style={{ textAlign: "center" }}
-      ></CustomText>
       <CustomForm
         _validationSchema={validationSchema}
-        _initialValues={{ email: "", password: "" }}
+        _initialValues={{ name: "", email: "", password: "" }}
         _onSubmit={values => console.log(values)}
       >
+        <CustomFormTextInput
+          _name={"name"}
+          _placeholder="Name"
+          _iconName={"human-greeting"}
+        ></CustomFormTextInput>
         <CustomFormTextInput
           _name={"email"}
           _placeholder="Email"

@@ -81,7 +81,6 @@ const messages = [
 function MessageListView(prop) {
   return (
     <CustomViewContainer _style={styles.viewContainer}>
-      <CustomText _text="Message List"></CustomText>
       <SwipeableFlatList
         data={messages}
         keyExtractor={messages => messages.id.toString()}

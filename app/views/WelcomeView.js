@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
     .label("Password")
 });
 
-function WelcomeView(prop) {
+function WelcomeView({ navigation }) {
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.logoContainer}>
@@ -66,7 +66,9 @@ function WelcomeView(prop) {
         ></CustomText>
         <CustomButton
           _text="Create Account"
-          _onPress={() => console.log("Sign Up")}
+          _onPress={() => {
+            navigation.navigate("CreateAccount");
+          }}
         ></CustomButton>
       </View>
     </CustomViewContainer>
