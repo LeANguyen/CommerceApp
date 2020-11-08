@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AccountView from "../views/AccountView";
 import CreateItemView from "../views/CreateItemView";
 import ItemListView from "../views/ItemListView";
+import ListingView from "../views/ListingView";
+
 import AccountNavigator from "./AccountNavigator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
@@ -25,8 +27,8 @@ const AppNavigator = () => {
       }}
     >
       <Tab.Screen
-        name={"ItemList"}
-        component={ItemListView}
+        name={"Listing"}
+        component={ListingView}
         options={{
           tabBarIcon: ({ color, size }) => {
             return (

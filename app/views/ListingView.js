@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import CustomCard from "../components/list/CustomCard";
 import CustomText from "../components/CustomText";
 import CustomListSeperator from "../components/list/CustomListSeperator";
 import colors from "../config/colors";
+
+import listingsApi from "../api/listings";
+import CustomButton from "../components/CustomButton";
 
 const items = [
   {
@@ -45,12 +48,33 @@ const items = [
 ];
 
 function ListingView(props) {
+  const [itemList, setItemList] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    getItemList();
+  }, []);
+
+  const getItemList = async () => {
+    const response = await listingsApi.getListings();
+    if (!response.ok) {
+      return setError(true);
+    }
+    setError(false);
+    setItemList(response.data);
+  };
+
   return (
     <CustomViewContainer style={styles.viewContainer}>
-      <CustomText _text="My List"></CustomText>
+      {error && (
+        <>
+          <CustomText _text="There is a connection error!"></CustomText>
+          <CustomButton _text="Retry" _onPress={getItemList}></CustomButton>
+        </>
+      )}
       <FlatList
-        data={items}
-        keyExtractor={items => items.name}
+        data={itemList}
+        keyExtractor={itemList => itemList.name}
         renderItem={({ item }) => <CustomCard _item={item}></CustomCard>}
         style={styles.cardList}
         // ItemSeparatorComponent={() => {
@@ -66,7 +90,6 @@ function ListingView(props) {
 }
 const styles = StyleSheet.create({
   viewContainer: {
-    padding: 10
     // backgroundColor: colors.red
   },
   cardList: {}

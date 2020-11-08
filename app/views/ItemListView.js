@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image, FlatList } from "react-native";
 
 import CustomCard from "../components/list/CustomCard";
@@ -7,6 +7,8 @@ import CustomViewContainer from "../components/CustomViewContainer";
 import CustomListItem from "../components/list/CustomListItem";
 import CustomListSeperator from "../components/list/CustomListSeperator";
 import colors from "../config/colors";
+
+import listingsApi from "../api/listings";
 
 const items = [
   {

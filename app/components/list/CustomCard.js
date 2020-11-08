@@ -18,8 +18,8 @@ const test_text2 =
 function CustomCard({ _item, _style }) {
   return (
     <View style={[styles.container, _style]}>
-      <Image style={styles.image} source={_item.image}></Image>
-      <CustomText _style={styles.title} _text={_item.name}></CustomText>
+      <Image style={styles.image} source={{ uri: _item.images[0].url }}></Image>
+      <CustomText _style={styles.title} _text={_item.title}></CustomText>
       <View style={styles.detailContainer}>
         <View style={styles.detailItem}>
           <CustomText
@@ -41,13 +41,6 @@ function CustomCard({ _item, _style }) {
           <CustomText _style={styles.subTitle} _text={"- Price:"}></CustomText>
           <CustomText _style={styles.subTitle} _text={_item.price}></CustomText>
         </View>
-        <View style={styles.detailItem}>
-          <CustomText _style={styles.subTitle} _text={"- Origin:"}></CustomText>
-          <CustomText
-            _style={styles.subTitle}
-            _text={_item.origin}
-          ></CustomText>
-        </View>
       </View>
       <View style={styles.descriptionContainer}>
         <CustomText
@@ -58,6 +51,12 @@ function CustomCard({ _item, _style }) {
           }}
           _text={"Description:"}
         ></CustomText>
+        {!_item.description && (
+          <CustomText
+            _text="No Description"
+            _style={{ color: colors.dim, fontSize: 12, margin: 0 }}
+          ></CustomText>
+        )}
         <ReadMore
           animate={true}
           backgroundColor={colors.mainLight}
@@ -70,7 +69,7 @@ function CustomCard({ _item, _style }) {
           seeMoreStyle={styles.seeMoreLess}
           seeLessStyle={styles.seeMoreLess}
         >
-          {[test_text1, test_text1]}
+          {_item.description}
         </ReadMore>
       </View>
     </View>
@@ -83,7 +82,8 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: colors.dim,
     backgroundColor: colors.mainLight,
-    marginVertical: 10
+    marginVertical: 10,
+    marginHorizontal: 20
   },
   icon: {
     // margin: 10
