@@ -8,6 +8,8 @@ import colors from "../config/colors";
 
 import listingsApi from "../api/listings";
 import CustomButton from "../components/CustomButton";
+import CustomIndicator from "../components/CustomIndicator";
+import useApi from "../hooks/useApi";
 
 const items = [
   {
@@ -48,32 +50,36 @@ const items = [
 ];
 
 function ListingView(props) {
-  const [itemList, setItemList] = useState([]);
-  const [error, setError] = useState(false);
+  // const [itemList, setItemList] = useState([]);
+  // const [error, setError] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // const getItemList = async () => {
+  //   const response = await listingsApi.getListings();
+  //   setIsLoading(false);
+  //   if (!response.ok) {
+  //     return setError(true);
+  //   }
+  //   setError(false);
+  //   setItemList(response.data);
+  // };
+  const getListingsApi = useApi(listingsApi.getListings);
 
   useEffect(() => {
-    getItemList();
+    getListingsApi.request();
   }, []);
-
-  const getItemList = async () => {
-    const response = await listingsApi.getListings();
-    if (!response.ok) {
-      return setError(true);
-    }
-    setError(false);
-    setItemList(response.data);
-  };
 
   return (
     <CustomViewContainer style={styles.viewContainer}>
-      {error && (
+      {getListingsApi.error && (
         <>
           <CustomText _text="There is a connection error!"></CustomText>
           <CustomButton _text="Retry" _onPress={getItemList}></CustomButton>
         </>
       )}
+      <CustomIndicator _isVisible={getListingsApi.isLoading}></CustomIndicator>
       <FlatList
-        data={itemList}
+        data={getListingsApi.data}
         keyExtractor={itemList => itemList.name}
         renderItem={({ item }) => <CustomCard _item={item}></CustomCard>}
         style={styles.cardList}

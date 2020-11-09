@@ -47,7 +47,7 @@ function WelcomeView({ navigation }) {
       >
         <CustomFormTextInput
           _name={"email"}
-          _placeholder="Email"
+          _placeholder="Email123"
           _iconName={"email"}
           _keyboardType="email-address"
         ></CustomFormTextInput>

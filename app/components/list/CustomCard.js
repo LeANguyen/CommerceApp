@@ -39,7 +39,10 @@ function CustomCard({ _item, _style }) {
         </View>
         <View style={styles.detailItem}>
           <CustomText _style={styles.subTitle} _text={"- Price:"}></CustomText>
-          <CustomText _style={styles.subTitle} _text={_item.price}></CustomText>
+          <CustomText
+            _style={styles.subTitle}
+            _text={"$" + _item.price}
+          ></CustomText>
         </View>
       </View>
       <View style={styles.descriptionContainer}>

@@ -15,7 +15,7 @@ export const addListing = (listing, onUploadProgress) => {
     data.append("images", {
       name: "image" + index,
       type: "image/jpeg",
-      uri: image,
+      uri: image
     })
   );
 
@@ -23,12 +23,12 @@ export const addListing = (listing, onUploadProgress) => {
     data.append("location", JSON.stringify(listing.location));
 
   return client.post(endpoint, data, {
-    onUploadProgress: (progress) =>
-      onUploadProgress(progress.loaded / progress.total),
+    onUploadProgress: progress =>
+      onUploadProgress(progress.loaded / progress.total)
   });
 };
 
 export default {
   addListing,
-  getListings,
+  getListings
 };
