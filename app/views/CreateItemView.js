@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import colors from "../config/colors";
 import CustomPicker from "../components/picker/CustomPicker";
 
+import listingsApi from "../api/listings";
+
 import {
   CustomForm,
   CustomFormTextInput,
@@ -74,12 +76,21 @@ function CreateItemView() {
   const location = useLocation();
   console.log(location);
 
+  const handleSubmit = async listing => {
+    const result = await listingsApi.addListing({ ...listing, location });
+    if (!result.ok) {
+      alert("There is a connection error!");
+      return;
+    }
+    alert("Success!");
+  };
+
   return (
     <CustomViewContainer>
       <CustomForm
         _validationSchema={validationSchema}
         _initialValues={{ name: "", price: "", description: "", images: [] }}
-        _onSubmit={values => console.log(values)}
+        _onSubmit={handleSubmit}
       >
         <CustomFormImagePicker name={"images"}></CustomFormImagePicker>
         <CustomFormTextInput
