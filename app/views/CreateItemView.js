@@ -17,6 +17,7 @@ import CustomFormImagePicker from "../components/form/CustomFormImagePicker";
 import * as Permissions from "expo-permissions";
 
 import useLocation from "../hooks/useLocation";
+import UploadView from "./UploadView";
 
 const categories = [
   {
@@ -73,20 +74,34 @@ const validationSchema = Yup.object().shape({
 });
 
 function CreateItemView() {
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const location = useLocation();
   console.log(location);
 
   const handleSubmit = async listing => {
-    const result = await listingsApi.addListing({ ...listing, location });
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      progress => setProgress(progress)
+    );
+
     if (!result.ok) {
       alert("There is a connection error!");
+      setUploadVisible(false);
       return;
     }
-    alert("Success!");
+    // alert("Success!");
   };
 
   return (
     <CustomViewContainer>
+      <UploadView
+        _visible={uploadVisible}
+        _progress={progress}
+        _onDone={() => setUploadVisible(false)}
+      ></UploadView>
       <CustomForm
         _validationSchema={validationSchema}
         _initialValues={{ name: "", price: "", description: "", images: [] }}

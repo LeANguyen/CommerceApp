@@ -74,7 +74,10 @@ function ListingView(props) {
       {getListingsApi.error && (
         <>
           <CustomText _text="There is a connection error!"></CustomText>
-          <CustomButton _text="Retry" _onPress={getItemList}></CustomButton>
+          <CustomButton
+            _text="Retry"
+            _onPress={getListingsApi.request}
+          ></CustomButton>
         </>
       )}
       <CustomIndicator _isVisible={getListingsApi.isLoading}></CustomIndicator>
