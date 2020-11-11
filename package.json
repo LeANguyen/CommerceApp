@@ -29,6 +29,7 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-country-picker-modal": "^2.0.0",
+    "react-native-expo-image-cache": "^4.1.0",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-progress": "^4.1.2",
     "react-native-reanimated": "~1.13.0",
@@ -36,7 +37,8 @@
     "react-native-screens": "~2.10.1",
     "react-native-swipeable-flat-list": "^0.1.2",
     "react-native-web": "~0.13.12",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "expo-blur": "~8.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"
