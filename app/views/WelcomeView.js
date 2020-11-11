@@ -7,6 +7,8 @@ import CustomButton from "../components/CustomButton";
 import CustomText from "../components/CustomText";
 import CustomViewContainer from "../components/CustomViewContainer";
 
+import authApi from "../api/auth";
+
 import {
   CustomForm,
   CustomFormTextInput,
@@ -14,6 +16,7 @@ import {
 } from "../components/form";
 
 import colors from "../config/colors";
+import ErrorMessage from "../components/form/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,6 +30,14 @@ const validationSchema = Yup.object().shape({
 });
 
 function WelcomeView({ navigation }) {
+  const [loginFailed, setLoginFailed] = useState(false);
+  const handleSubmit = async (email, password) => {
+    const result = await authApi.login(email, password);
+    if (!result.ok) {
+      setLoginFailed(true);
+    }
+  };
+
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.logoContainer}>
@@ -43,7 +54,7 @@ function WelcomeView({ navigation }) {
       <CustomForm
         _validationSchema={validationSchema}
         _initialValues={{ email: "", password: "" }}
-        _onSubmit={values => console.log(values)}
+        _onSubmit={handleSubmit}
       >
         <CustomFormTextInput
           _name={"email"}
@@ -57,6 +68,10 @@ function WelcomeView({ navigation }) {
           _isSecure={true}
           _iconName={"lock-question"}
         ></CustomFormTextInput>
+        <ErrorMessage
+          _error={"Invalid email or password."}
+          _isVisible={loginFailed}
+        ></ErrorMessage>
         <SubmitButton _text="Create Item"></SubmitButton>
       </CustomForm>
       <View style={styles.registerContainer}>

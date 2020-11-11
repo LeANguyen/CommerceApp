@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import colors from "../../config/colors";
 import icons from "../../config/icons";
@@ -9,6 +9,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ReadMore from "@fawazahmed/react-native-read-more";
 import CustomIcon from "../CustomIcon";
+import { Image } from "react-native-expo-image-cache";
 
 const test_text1 =
   "facebook.github.io/react-native/docs/text#numberoflines. That should work, unless you have a very specific use case. And by the way, if you can share any specific example or code, that would really help";
@@ -18,7 +19,13 @@ const test_text2 =
 function CustomCard({ _item, _style }) {
   return (
     <View style={[styles.container, _style]}>
-      <Image style={styles.image} source={{ uri: _item.images[0].url }}></Image>
+      <Image
+        style={styles.image}
+        tint="light"
+        preview={{ uri: _item.images[0].thumbnailUrl }}
+        uri={_item.images[0].url}
+      ></Image>
+      {/* <Image style={styles.image} source={{ uri: _item.images[0].url }}></Image> */}
       <CustomText _style={styles.title} _text={_item.title}></CustomText>
       <View style={styles.detailContainer}>
         <View style={styles.detailItem}>
@@ -114,8 +121,6 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    borderBottomWidth: 1,
-    borderColor: colors.red,
     width: "100%",
     height: 300
   },

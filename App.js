@@ -56,6 +56,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import OfflineNotice from "./app/components/OfflineNotice";
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -173,12 +174,15 @@ export default function App() {
     //   <MyTabs></MyTabs>
     // </NavigationContainer>
 
-    // <NavigationContainer theme={navigationTheme}>
-    //   <AuthNavigator></AuthNavigator>
-    // </NavigationContainer>
-    <NavigationContainer>
-      <AppNavigator></AppNavigator>
+    <NavigationContainer theme={navigationTheme}>
+      <AuthNavigator></AuthNavigator>
     </NavigationContainer>
+    // <>
+    //   <OfflineNotice></OfflineNotice>
+    //   <NavigationContainer>
+    //     <AppNavigator></AppNavigator>
+    //   </NavigationContainer>
+    // </>
   );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
