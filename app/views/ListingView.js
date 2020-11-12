@@ -67,19 +67,29 @@ function ListingView(props) {
 
   useEffect(() => {
     getListingsApi.request();
+    console.log(
+      "*******************************************************************\n" +
+        "*******************************************************************\n" +
+        "*******************************************************************\n"
+    );
+    console.log(getListingsApi.data);
   }, []);
 
   return (
     <CustomViewContainer style={styles.viewContainer}>
       {getListingsApi.error && (
         <>
-          <CustomText _text="There is a connection error!"></CustomText>
+          <CustomText
+            _text="There is a connection error!"
+            _style={{ textAlign: "center" }}
+          ></CustomText>
           <CustomButton
             _text="Retry"
             _onPress={getListingsApi.request}
           ></CustomButton>
         </>
       )}
+
       <CustomIndicator _isVisible={getListingsApi.isLoading}></CustomIndicator>
       <FlatList
         data={getListingsApi.data}

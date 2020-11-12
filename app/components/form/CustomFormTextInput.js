@@ -10,7 +10,8 @@ function CustomFormTextInput({
   _isSecure,
   _keyboardType,
   _multiline,
-  _placeholder
+  _placeholder,
+  _value
 }) {
   const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
 
@@ -24,6 +25,7 @@ function CustomFormTextInput({
         _keyboardType={_keyboardType}
         _multiline={_multiline}
         _placeholder={_placeholder}
+        _value={_value}
       />
       <ErrorMessage _error={errors[_name]} _isVisible={touched[_name]} />
     </>

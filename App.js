@@ -57,6 +57,7 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
+import AuthContext from "./app/auth/context";
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -163,6 +164,7 @@ const Setting = ({ route }) => (
 );
 
 export default function App() {
+  const [user, setUser] = useState();
   console.log("App started");
 
   return (
@@ -174,15 +176,18 @@ export default function App() {
     //   <MyTabs></MyTabs>
     // </NavigationContainer>
 
-    <NavigationContainer theme={navigationTheme}>
-      <AuthNavigator></AuthNavigator>
-    </NavigationContainer>
-    // <>
-    //   <OfflineNotice></OfflineNotice>
-    //   <NavigationContainer>
-    //     <AppNavigator></AppNavigator>
+    // <AuthContext.Provider value={{ user, setUser }}>
+    //   <NavigationContainer theme={navigationTheme}>
+    //     {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
     //   </NavigationContainer>
-    // </>
+    // </AuthContext.Provider>
+
+    <>
+      <OfflineNotice></OfflineNotice>
+      <NavigationContainer>
+        <AppNavigator></AppNavigator>
+      </NavigationContainer>
+    </>
   );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;

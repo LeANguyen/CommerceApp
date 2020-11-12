@@ -5,6 +5,7 @@ export default useApi = apiFunc => {
   const [isLoading, setIsLoading] = useState(true);
 
   const request = async () => {
+    setIsLoading(true);
     const response = await apiFunc();
     setIsLoading(false);
     if (!response.ok) {

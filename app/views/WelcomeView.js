@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Yup from "yup";
@@ -8,6 +8,7 @@ import CustomText from "../components/CustomText";
 import CustomViewContainer from "../components/CustomViewContainer";
 
 import authApi from "../api/auth";
+import jwtDecode from "jwt-decode";
 
 import {
   CustomForm,
@@ -17,6 +18,7 @@ import {
 
 import colors from "../config/colors";
 import ErrorMessage from "../components/form/ErrorMessage";
+import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,12 +32,21 @@ const validationSchema = Yup.object().shape({
 });
 
 function WelcomeView({ navigation }) {
+  const authContext = useContext(AuthContext);
   const [loginFailed, setLoginFailed] = useState(false);
-  const handleSubmit = async (email, password) => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async ({ email, password }) => {
     const result = await authApi.login(email, password);
     if (!result.ok) {
-      setLoginFailed(true);
+      return setLoginFailed(true);
     }
+    setLoginFailed(false);
+    const user = jwtDecode(result.data);
+    authContext.setUser(user);
+    console.log(authContext.user);
   };
 
   return (
@@ -61,18 +72,27 @@ function WelcomeView({ navigation }) {
           _placeholder="Email"
           _iconName={"email"}
           _keyboardType="email-address"
+          // _value={email}
         ></CustomFormTextInput>
         <CustomFormTextInput
           _name={"password"}
           _placeholder="Password"
           _isSecure={true}
           _iconName={"lock-question"}
+          // _value={password}
         ></CustomFormTextInput>
         <ErrorMessage
           _error={"Invalid email or password."}
           _isVisible={loginFailed}
         ></ErrorMessage>
-        <SubmitButton _text="Create Item"></SubmitButton>
+        <SubmitButton _text="Log In"></SubmitButton>
+        {/* <CustomButton
+          _text={"TEST"}
+          _onPress={() => {
+            setEmail("mosh@domain.com");
+            setPassword("12345");
+          }}
+        ></CustomButton> */}
       </CustomForm>
       <View style={styles.registerContainer}>
         <CustomText

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import CustomListItem from "../components/list/CustomListItem";
 import CustomIcon from "../components/CustomIcon";
 import colors from "../config/colors";
 import CustomListSeperator from "../components/list/CustomListSeperator";
+import AuthContext from "../auth/context";
 
 const menuItems = [
   {
@@ -24,25 +25,17 @@ const menuItems = [
       backgroundColor: colors.green
     },
     targetView: "MessageList"
-  },
-  {
-    title: "Log Out",
-    icon: {
-      name: "logout",
-      size: 70,
-      backgroundColor: colors.red
-    },
-    targetView: ""
   }
 ];
 
 function AccountView({ navigation }) {
+  const { user, setUser } = useContext(AuthContext);
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.container}>
         <CustomListItem
-          _title="The Orange Cart"
-          _subTitle="Buy Low & Sell High"
+          _title={user.name}
+          _subTitle={user.email}
           _image={require("../assets/avatar3.jpg")}
         ></CustomListItem>
       </View>
@@ -62,6 +55,13 @@ function AccountView({ navigation }) {
           )}
           style={styles.menuList}
         ></FlatList>
+        <CustomListItem
+          _title={"Log Out"}
+          _iconName={"logout"}
+          _onPress={() => {
+            setUser(null);
+          }}
+        ></CustomListItem>
       </View>
     </CustomViewContainer>
   );

@@ -11,7 +11,8 @@ function CustomTextInput({
   _onChangeText,
   _onBLur,
   _multiline = false,
-  _style
+  _style,
+  _value
 }) {
   return (
     <View style={[styles.container, _style]}>
@@ -22,6 +23,7 @@ function CustomTextInput({
         color={colors.dim}
       ></MaterialCommunityIcons>
       <TextInput
+        value={_value}
         style={styles.text}
         placeholder={_placeholder}
         placeholderTextColor={colors.dim}
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
 
     backgroundColor: colors.mainLight,
+    height: 50,
     borderRadius: 25,
     borderWidth: 0.5,
     borderColor: colors.dim
