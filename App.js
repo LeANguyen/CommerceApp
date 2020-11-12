@@ -42,6 +42,7 @@ import CustomText from "./app/components/CustomText";
 import CustomImagePicker from "./app/components/image_picker/CustomImagePicker";
 import CustomImagePickerItem from "./app/components/image_picker/CustomImagePickerItem";
 
+import jwtDecode from "jwt-decode";
 import {
   CustomForm,
   CustomFormTextInput,
@@ -58,6 +59,7 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
+import authStorage from "./app/auth/authStorage";
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -167,6 +169,17 @@ export default function App() {
   const [user, setUser] = useState();
   console.log("App started");
 
+  const restoreToken = async () => {
+    const token = await authStorage.getToken();
+
+    if (!token) return;
+    setUser(jwtDecode(token));
+  };
+
+  useEffect(() => {
+    restoreToken();
+  }, []);
+
   return (
     // <NavigationContainer>
     //   <StackNavigator></StackNavigator>
@@ -176,18 +189,18 @@ export default function App() {
     //   <MyTabs></MyTabs>
     // </NavigationContainer>
 
-    // <AuthContext.Provider value={{ user, setUser }}>
-    //   <NavigationContainer theme={navigationTheme}>
-    //     {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
-    //   </NavigationContainer>
-    // </AuthContext.Provider>
-
-    <>
-      <OfflineNotice></OfflineNotice>
-      <NavigationContainer>
-        <AppNavigator></AppNavigator>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <NavigationContainer theme={navigationTheme}>
+        {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
       </NavigationContainer>
-    </>
+    </AuthContext.Provider>
+
+    // <>
+    //   <OfflineNotice></OfflineNotice>
+    //   <NavigationContainer>
+    //     <AppNavigator></AppNavigator>
+    //   </NavigationContainer>
+    // </>
   );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;

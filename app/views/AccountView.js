@@ -6,6 +6,7 @@ import CustomIcon from "../components/CustomIcon";
 import colors from "../config/colors";
 import CustomListSeperator from "../components/list/CustomListSeperator";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/authStorage";
 
 const menuItems = [
   {
@@ -30,6 +31,12 @@ const menuItems = [
 
 function AccountView({ navigation }) {
   const { user, setUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setUser(null);
+    authStorage.removeToken();
+  };
+
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.container}>
@@ -59,7 +66,7 @@ function AccountView({ navigation }) {
           _title={"Log Out"}
           _iconName={"logout"}
           _onPress={() => {
-            setUser(null);
+            handleLogout();
           }}
         ></CustomListItem>
       </View>

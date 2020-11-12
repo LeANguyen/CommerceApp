@@ -19,6 +19,7 @@ import {
 import colors from "../config/colors";
 import ErrorMessage from "../components/form/ErrorMessage";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/authStorage";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -46,7 +47,7 @@ function WelcomeView({ navigation }) {
     setLoginFailed(false);
     const user = jwtDecode(result.data);
     authContext.setUser(user);
-    console.log(authContext.user);
+    authStorage.storeToken(result.data);
   };
 
   return (
