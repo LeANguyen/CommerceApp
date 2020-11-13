@@ -35,6 +35,8 @@ import CreateItemView from "./app/views/CreateItemView";
 import CountryPickerView from "./app/views/CountryPickerView";
 
 import colors from "./app/config/colors";
+import jwtDecode from "jwt-decode";
+import { AppLoading } from "expo";
 
 import CustomViewContainer from "./app/components/CustomViewContainer";
 import CustomButton from "./app/components/CustomButton";
@@ -42,7 +44,6 @@ import CustomText from "./app/components/CustomText";
 import CustomImagePicker from "./app/components/image_picker/CustomImagePicker";
 import CustomImagePickerItem from "./app/components/image_picker/CustomImagePickerItem";
 
-import jwtDecode from "jwt-decode";
 import {
   CustomForm,
   CustomFormTextInput,
@@ -60,6 +61,7 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/authStorage";
+
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
 const StackNavigator = () => (
@@ -167,18 +169,27 @@ const Setting = ({ route }) => (
 
 export default function App() {
   const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
   console.log("App started");
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-
-    if (!token) return;
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (!user) return;
+    setUser(user);
   };
 
-  useEffect(() => {
-    restoreToken();
-  }, []);
+  // useEffect(() => {
+  //   restoreToken();
+  // }, []);
+
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={restoreUser}
+        onFinish={() => setIsReady(true)}
+      ></AppLoading>
+    );
+  }
 
   return (
     // <NavigationContainer>
