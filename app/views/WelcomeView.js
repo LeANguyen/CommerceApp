@@ -20,6 +20,7 @@ import colors from "../config/colors";
 import ErrorMessage from "../components/form/ErrorMessage";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/authStorage";
+import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,7 +34,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function WelcomeView({ navigation }) {
-  const authContext = useContext(AuthContext);
+  // const authContext = useContext(AuthContext);
+  const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -45,9 +47,11 @@ function WelcomeView({ navigation }) {
       return setLoginFailed(true);
     }
     setLoginFailed(false);
-    const user = jwtDecode(result.data);
-    authContext.setUser(user);
-    authStorage.storeToken(result.data);
+
+    auth.login(result.data);
+    // const user = jwtDecode(result.data);
+    // authContext.setUser(user);
+    // authStorage.storeToken(result.data);
   };
 
   return (

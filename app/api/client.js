@@ -1,6 +1,7 @@
 import { create } from "apisauce";
 import cache from "../utility/cache";
 import authStorage from "../auth/authStorage";
+import { log } from "react-native-reanimated";
 
 const apiClient = create({
   // 192.168.5.102 - Home
@@ -11,7 +12,7 @@ const apiClient = create({
 apiClient.addAsyncRequestTransform(async request => {
   const authToken = await authStorage.getToken();
   if (!authToken) return;
-  request.header["x-auth-token"] = authToken;
+  request.headers["x-auth-token"] = authToken;
 });
 
 // const get = apiClient.get;

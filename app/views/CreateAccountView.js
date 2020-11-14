@@ -6,6 +6,8 @@ import colors from "../config/colors";
 
 import * as Yup from "yup";
 
+import authApi from "../api/auth";
+
 import {
   CustomForm,
   CustomFormTextInput,
@@ -27,8 +29,20 @@ const validationSchema = Yup.object().shape({
 });
 
 function CreateAccountView() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const handleSubmit = async userInfo => {
+    const result = await authApi.register(userInfo);
+
+    if (!result.ok) {
+      if (result.data) {
+        setError(result.data);
+      } else {
+        setError("An unexpected error happened!");
+      }
+    }
+  };
 
   return (
     <CustomViewContainer _style={styles.viewContainer}>
