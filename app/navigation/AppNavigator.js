@@ -9,10 +9,16 @@ import AccountNavigator from "./AccountNavigator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import CreateItemButton from "./CreateItemButton";
+import useNotifications from "../hooks/useNotifications";
+import navigation from "../navigation/rootNavigation";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+  useNotifications(notification => {
+    console.log(notification);
+    navigation.navigate("Account");
+  });
   return (
     <Tab.Navigator
       tabBarOptions={{

@@ -21,6 +21,8 @@ import ErrorMessage from "../components/form/ErrorMessage";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/authStorage";
 import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
+import CustomIndicator from "../components/CustomIndicator";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -35,23 +37,22 @@ const validationSchema = Yup.object().shape({
 
 function WelcomeView({ navigation }) {
   // const authContext = useContext(AuthContext);
+  const loginApi = useApi(authApi.login);
+  // const auth = useAuth();
+
+  // const handleSubmit = ({ email, password }) => {
+  //   loginApi.request(email, password);
+  //   auth.login(loginApi.data);
+  // };
+
   const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi.login(email, password);
-    if (!result.ok) {
-      return setLoginFailed(true);
-    }
+    if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
-
     auth.login(result.data);
-    // const user = jwtDecode(result.data);
-    // authContext.setUser(user);
-    // authStorage.storeToken(result.data);
   };
 
   return (
@@ -88,8 +89,9 @@ function WelcomeView({ navigation }) {
         ></CustomFormTextInput>
         <ErrorMessage
           _error={"Invalid email or password."}
-          _isVisible={loginFailed}
+          _isVisible={loginApi.error}
         ></ErrorMessage>
+        <CustomIndicator _isVisible={loginApi.isLoading}></CustomIndicator>
         <SubmitButton _text="Log In"></SubmitButton>
         {/* <CustomButton
           _text={"TEST"}

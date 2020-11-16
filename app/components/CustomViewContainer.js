@@ -7,9 +7,9 @@ import colors from "../config/colors";
 function CustomViewContainer({ children, _style }) {
   return (
     <SafeAreaView style={[styles.screen, _style]}>
-      {/* <View style={[styles.view, _style]}>{children}</View> */}
+      <View style={[styles.view, _style]}>{children}</View>
       {/* <ScrollView style={styles.scroll}>{children}</ScrollView> */}
-      {children}
+      {/* {children} */}
     </SafeAreaView>
   );
 }
@@ -17,13 +17,12 @@ function CustomViewContainer({ children, _style }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: colors.secondaryLight,
     paddingTop: Constants.statusBarHeight
   },
   view: {
     flex: 1,
     alignItems: "stretch",
-    backgroundColor: colors.green
+    backgroundColor: colors.secondaryLight
   },
   scroll: {
     width: "100%",

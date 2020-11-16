@@ -61,6 +61,7 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/authStorage";
+import { navigationRef } from "./app/navigation/rootNavigation";
 
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
@@ -201,7 +202,7 @@ export default function App() {
     // </NavigationContainer>
 
     <AuthContext.Provider value={{ user, setUser }}>
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
       </NavigationContainer>
     </AuthContext.Provider>

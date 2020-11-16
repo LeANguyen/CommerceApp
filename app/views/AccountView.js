@@ -7,6 +7,7 @@ import colors from "../config/colors";
 import CustomListSeperator from "../components/list/CustomListSeperator";
 import AuthContext from "../auth/context";
 import authStorage from "../auth/authStorage";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
   {
@@ -30,19 +31,18 @@ const menuItems = [
 ];
 
 function AccountView({ navigation }) {
-  const { user, setUser } = useContext(AuthContext);
+  const auth = useAuth();
 
   const handleLogout = () => {
-    setUser(null);
-    authStorage.removeToken();
+    auth.logout();
   };
 
   return (
     <CustomViewContainer _style={styles.viewContainer}>
       <View style={styles.container}>
         <CustomListItem
-          _title={user.name}
-          _subTitle={user.email}
+          _title={auth.user.name}
+          _subTitle={auth.user.email}
           _image={require("../assets/avatar3.jpg")}
         ></CustomListItem>
       </View>

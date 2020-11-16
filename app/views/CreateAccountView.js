@@ -13,6 +13,10 @@ import {
   CustomFormTextInput,
   SubmitButton
 } from "../components/form";
+import ErrorMessage from "../components/form/ErrorMessage";
+import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
+import CustomIndicator from "../components/CustomIndicator";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,19 +33,29 @@ const validationSchema = Yup.object().shape({
 });
 
 function CreateAccountView() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const auth = useAuth();
+  const registerApi = useApi(authApi.register);
+  const loginApi = useApi(authApi.login);
+
+  const [error, setError] = useState();
+
   const handleSubmit = async userInfo => {
-    const result = await authApi.register(userInfo);
+    const result = await registerApi.request(userInfo);
 
     if (!result.ok) {
       if (result.data) {
-        setError(result.data);
+        setError(result.data.error);
       } else {
         setError("An unexpected error happened!");
       }
+      return;
     }
+
+    const loginResult = await loginApi.request(
+      userInfo.email,
+      userInfo.password
+    );
+    auth.login(loginResult.data);
   };
 
   return (
@@ -49,12 +63,12 @@ function CreateAccountView() {
       <CustomForm
         _validationSchema={validationSchema}
         _initialValues={{ name: "", email: "", password: "" }}
-        _onSubmit={values => console.log(values)}
+        _onSubmit={handleSubmit}
       >
         <CustomFormTextInput
           _name={"name"}
           _placeholder="Name"
-          _iconName={"human-greeting"}
+          _iconName={"account"}
         ></CustomFormTextInput>
         <CustomFormTextInput
           _name={"email"}
@@ -68,6 +82,12 @@ function CreateAccountView() {
           _isSecure={true}
           _iconName={"lock-question"}
         ></CustomFormTextInput>
+        {error && (
+          <ErrorMessage _error={error} _isVisible={error}></ErrorMessage>
+        )}
+        <CustomIndicator
+          _isVisible={registerApi.isLoading || loginApi.isLoading}
+        ></CustomIndicator>
         <SubmitButton _text="Create Item"></SubmitButton>
       </CustomForm>
     </CustomViewContainer>

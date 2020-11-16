@@ -89,7 +89,6 @@ function ListingView(props) {
           ></CustomButton>
         </>
       )}
-
       <CustomIndicator _isVisible={getListingsApi.isLoading}></CustomIndicator>
       <FlatList
         data={getListingsApi.data}

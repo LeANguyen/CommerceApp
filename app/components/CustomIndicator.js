@@ -8,16 +8,25 @@ function CustomIndicator({ _isVisible = true }) {
   }
   return (
     // <></>
-    <LottieView
-      autoPlay
-      loop
-      source={require("../assets/animations/loader.json")}
-    ></LottieView>
+    <View style={styles.container}>
+      <LottieView
+        autoPlay
+        loop
+        source={require("../assets/animations/loader.json")}
+      ></LottieView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {}
+  container: {
+    backgroundColor: "white",
+    width: "100%",
+    height: "100%",
+    zIndex: 1,
+    opacity: 0.5,
+    position: "absolute"
+  }
 });
 
 export default CustomIndicator;
