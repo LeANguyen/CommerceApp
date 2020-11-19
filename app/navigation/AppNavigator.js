@@ -1,16 +1,13 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AccountView from "../views/AccountView";
 import CreateItemView from "../views/CreateItemView";
-import ItemListView from "../views/ItemListView";
-import ListingView from "../views/ListingView";
 
 import AccountNavigator from "./AccountNavigator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
-import CreateItemButton from "./CreateItemButton";
 import useNotifications from "../hooks/useNotifications";
 import navigation from "../navigation/rootNavigation";
+import FeedNavigator from "./FeedNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,22 +30,16 @@ const AppNavigator = () => {
       }}
     >
       <Tab.Screen
-        name={"Listing"}
-        component={ListingView}
+        name="Feed"
+        component={FeedNavigator}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return (
-              <MaterialCommunityIcons
-                name="home"
-                size={size}
-                color={color}
-              ></MaterialCommunityIcons>
-            );
-          }
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          )
         }}
-      ></Tab.Screen>
+      />
       <Tab.Screen
-        name={"CreateItem"}
+        name={"Add"}
         component={CreateItemView}
         options={{
           //   tabBarButton: () => {

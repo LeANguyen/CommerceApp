@@ -29,7 +29,6 @@ import ItemListView from "./app/views/ItemListView";
 import CustomCard from "./app/components/list/CustomCard";
 import MessageListView from "./app/views/MessageListView";
 import AccountView from "./app/views/AccountView";
-import ListingView from "./app/views/ListingView";
 import CreateAccountView from "./app/views/CreateAccountView";
 import CreateItemView from "./app/views/CreateItemView";
 import CountryPickerView from "./app/views/CountryPickerView";
@@ -62,6 +61,7 @@ import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/authStorage";
 import { navigationRef } from "./app/navigation/rootNavigation";
+import StreamDisplayView from "./app/views/StreamDisplayView";
 
 // STACK STACK STACK STACK STACK STACK
 const Stack = createStackNavigator();
@@ -192,28 +192,28 @@ export default function App() {
     );
   }
 
-  return (
-    // <NavigationContainer>
-    //   <StackNavigator></StackNavigator>
-    // </NavigationContainer>
+  // return (
+  //   // <NavigationContainer>
+  //   //   <StackNavigator></StackNavigator>
+  //   // </NavigationContainer>
 
-    // <NavigationContainer>
-    //   <MyTabs></MyTabs>
-    // </NavigationContainer>
+  //   // <NavigationContainer>
+  //   //   <MyTabs></MyTabs>
+  //   // </NavigationContainer>
 
-    <AuthContext.Provider value={{ user, setUser }}>
-      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-        {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
-      </NavigationContainer>
-    </AuthContext.Provider>
+  //   <AuthContext.Provider value={{ user, setUser }}>
+  //     <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+  //       {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
+  //     </NavigationContainer>
+  //   </AuthContext.Provider>
 
-    // <>
-    //   <OfflineNotice></OfflineNotice>
-    //   <NavigationContainer>
-    //     <AppNavigator></AppNavigator>
-    //   </NavigationContainer>
-    // </>
-  );
+  //   // <>
+  //   //   <OfflineNotice></OfflineNotice>
+  //   //   <NavigationContainer>
+  //   //     <AppNavigator></AppNavigator>
+  //   //   </NavigationContainer>
+  //   // </>
+  // );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
   // return <CreateItemView></CreateItemView>;
@@ -224,6 +224,7 @@ export default function App() {
   // return <ListingView></ListingView>;
   // return <CountryPickerView></CountryPickerView>;
   // return <ItemTestView></ItemTestView>;
+  return <StreamDisplayView></StreamDisplayView>;
 }
 
 const styles = StyleSheet.create({

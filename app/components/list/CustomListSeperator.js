@@ -8,7 +8,6 @@ function CustomListSeperator({ style }) {
 
 const styles = StyleSheet.create({
   seperator: {
-    width: "100%",
     height: 0.25,
     backgroundColor: colors.dim
   }

@@ -77,10 +77,11 @@ function AccountView({ navigation }) {
 const styles = StyleSheet.create({
   viewContainer: {
     alignItems: "stretch",
-    padding: 0
+    paddingTop: 0
   },
   container: {
-    marginVertical: 20
+    // marginVertical: 20
+    margin: 0
   },
   menuList: {}
 });

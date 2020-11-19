@@ -7,6 +7,7 @@ import colors from "../config/colors";
 import CustomPicker from "../components/picker/CustomPicker";
 
 import listingsApi from "../api/listings";
+import categoriesApi from "../api/categoriesApi";
 
 import {
   CustomForm,
@@ -14,51 +15,54 @@ import {
   SubmitButton
 } from "../components/form";
 import CustomFormImagePicker from "../components/form/CustomFormImagePicker";
+import CustomIndicator from "../components/CustomIndicator";
+
 import * as Permissions from "expo-permissions";
 
 import useLocation from "../hooks/useLocation";
 import UploadView from "./UploadView";
+import useApi from "../hooks/useApi";
 
 const categories = [
   {
-    label: "Furniture",
+    name: "Furniture",
     icon: "lamp",
     backgroundColor: colors.red,
     value: 1
   },
   {
-    label: "Clothing",
+    name: "Clothing",
     icon: "tshirt-v",
     backgroundColor: colors.green,
     value: 2
   },
-  { label: "Vehicle", icon: "car", backgroundColor: colors.yellow, value: 3 },
+  { name: "Vehicle", icon: "car", backgroundColor: colors.yellow, value: 3 },
   {
-    label: "Game",
+    name: "Game",
     icon: "gamepad-variant",
     backgroundColor: colors.blue,
     value: 4
   },
-  { label: "Food", icon: "food", backgroundColor: colors.purple, value: 5 },
+  { name: "Food", icon: "food", backgroundColor: colors.purple, value: 5 },
   {
-    label: "Sport",
+    name: "Sport",
     icon: "basketball",
     backgroundColor: colors.orange,
     value: 6
   },
   {
-    label: "Digital Media",
+    name: "Digital Media",
     icon: "movie",
     backgroundColor: colors.pink,
     value: 7
   },
   {
-    label: "Book",
+    name: "Book",
     icon: "book-open-page-variant",
     backgroundColor: colors.brown,
     value: 8
   },
-  { label: "Other", icon: "star", backgroundColor: colors.grey, value: 9 }
+  { name: "Other", icon: "star", backgroundColor: colors.grey, value: 9 }
 ];
 
 const validationSchema = Yup.object().shape({
@@ -79,6 +83,14 @@ function CreateItemView() {
   const location = useLocation();
   console.log(location);
 
+  const getCategoriesApi = useApi(categoriesApi.getCategories);
+
+  useEffect(() => {
+    getCategoriesApi.request();
+    console.log("OUCH OUCH OUCH");
+    console.log(getCategoriesApi.data);
+  }, []);
+
   const handleSubmit = async listing => {
     setProgress(0);
     setUploadVisible(true);
@@ -97,6 +109,9 @@ function CreateItemView() {
 
   return (
     <CustomViewContainer>
+      <CustomIndicator
+        _isVisible={getCategoriesApi.isLoading}
+      ></CustomIndicator>
       <UploadView
         _visible={uploadVisible}
         _progress={progress}
@@ -130,13 +145,12 @@ function CreateItemView() {
           _name={"description"}
           _multiline={true}
         ></CustomFormTextInput>
-        <CustomPicker
-          _isSecure={true}
-          _style={styles.input}
-          _iconName={categories[0].icon}
-          _title={categories[0].label}
-          _items={categories}
-        ></CustomPicker>
+        {getCategoriesApi.data && (
+          <CustomPicker
+            _style={styles.input}
+            _items={getCategoriesApi.data}
+          ></CustomPicker>
+        )}
         <SubmitButton _text="Create Item"></SubmitButton>
       </CustomForm>
     </CustomViewContainer>

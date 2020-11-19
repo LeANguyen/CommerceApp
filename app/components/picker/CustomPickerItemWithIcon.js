@@ -14,10 +14,9 @@ function CustomPickerItemWithIcon({
     <TouchableOpacity onPress={_onPress} style={styles.container}>
       <CustomIcon
         _name={_icon}
-        _iconColor={colors.dim}
+        _iconColor={"rgb(255, 255, 255)"}
         _backgroundColor={_backgroundColor}
         _size={80}
-        _bordered={true}
       ></CustomIcon>
       <CustomText _text={_text} _style={styles.text}></CustomText>
     </TouchableOpacity>

@@ -1,28 +1,28 @@
 // // light mode OCD
-// export default {
-//   mainDark: "rgb(55, 55, 55)",
-//   secondaryDark: "rgb(60, 65, 65)",
-//   mainLight: "rgb(255, 255, 255)",
-//   secondaryLight: "rgb(240, 240, 240)",
-//   dim: "rgb(130, 130, 130)",
-//   red: "rgb(205, 90, 75)",
-//   green: "rgb(75, 155, 100)",
-//   yellow: "rgb(250, 205, 95)",
-//   blue: "rgb(85, 140, 235)"
-// };
-
-// dark mode OCD
 export default {
-  mainLight: "rgb(55, 55, 55)",
-  secondaryLight: "rgb(60, 65, 65)",
-  mainDark: "rgb(255, 255, 255)",
-  secondaryDark: "rgb(240, 240, 240)",
+  mainDark: "rgb(55, 55, 55)",
+  secondaryDark: "rgb(60, 65, 65)",
+  mainLight: "rgb(255, 255, 255)",
+  secondaryLight: "rgb(240, 240, 240)",
   dim: "rgb(130, 130, 130)",
   red: "rgb(205, 90, 75)",
   green: "rgb(75, 155, 100)",
   yellow: "rgb(250, 205, 95)",
   blue: "rgb(85, 140, 235)"
 };
+
+// dark mode OCD
+// export default {
+//   mainLight: "rgb(55, 55, 55)",
+//   secondaryLight: "rgb(60, 65, 65)",
+//   mainDark: "rgb(255, 255, 255)",
+//   secondaryDark: "rgb(240, 240, 240)",
+//   dim: "rgb(130, 130, 130)",
+//   red: "rgb(205, 90, 75)",
+//   green: "rgb(75, 155, 100)",
+//   yellow: "rgb(250, 205, 95)",
+//   blue: "rgb(85, 140, 235)"
+// };
 
 // light mode
 // export default {

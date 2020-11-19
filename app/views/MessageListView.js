@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View, ScrollView } from "react-native";
 import colors from "../config/colors";
 import CustomListItem from "../components/list/CustomListItem";
@@ -10,6 +10,9 @@ import { SwipeableFlatList } from "react-native-swipeable-flat-list";
 import { LogBox } from "react-native";
 import CustomText from "../components/CustomText";
 import CustomIcon from "../components/CustomIcon";
+import useApi from "../hooks/useApi";
+import messagesApi from "../api/messagesApi";
+import CustomIndicator from "../components/CustomIndicator";
 
 LogBox.ignoreLogs([
   "Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`"
@@ -79,17 +82,26 @@ const messages = [
 ];
 
 function MessageListView(prop) {
+  const getMessagesApi = useApi(messagesApi.getMessages);
+
+  useEffect(() => {
+    console.log("GETING MESSAGE");
+    const result = getMessagesApi.request();
+    console.log(result);
+  }, []);
+
   return (
     <CustomViewContainer _style={styles.viewContainer}>
+      {/* <CustomIndicator _isVisible={getMessagesApi.isLoading}></CustomIndicator> */}
       <SwipeableFlatList
         data={messages}
         keyExtractor={messages => messages.id.toString()}
         renderItem={({ item }) => (
           <CustomListItem
             style={styles.messageListItem}
-            _title={item.title}
-            _subTitle={item.description}
-            _image={item.image}
+            _title={"AAA"}
+            _subTitle={"AAA"}
+            _image={require("../assets/avatar3.jpg")}
             _onPress={() => {
               alert("AAA");
               console.log(item);
@@ -120,8 +132,8 @@ function MessageListView(prop) {
 const styles = StyleSheet.create({
   viewContainer: {},
   messageList: {
-    width: "100%",
-    backgroundColor: colors.secondaryLight
+    backgroundColor: colors.secondaryLight,
+    marginHorizontal: 20
   },
   messageListItem: {
     height: 90,
@@ -131,7 +143,8 @@ const styles = StyleSheet.create({
     borderColor: colors.dim
   },
   listSeperator: {
-    marginVertical: 10
+    backgroundColor: colors.secondaryLight,
+    margin: 10
   },
   rightAction: {
     width: 90,

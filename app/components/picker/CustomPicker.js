@@ -22,8 +22,8 @@ import { SwipeableListItem } from "react-native-swipeable-flat-list";
 
 function CustomPicker({ _items }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [category, setCategory] = useState(_items[0].label);
-  const [icon, setIcon] = useState(_items[0].icon);
+  const [category, setCategory] = useState("Furniture");
+  const [icon, setIcon] = useState("floor-lamp");
 
   return (
     <TouchableOpacity
@@ -59,18 +59,18 @@ function CustomPicker({ _items }) {
           <FlatList
             style={{ marginTop: 30 }}
             data={_items}
-            keyExtractor={_items => _items.value.toString()}
+            keyExtractor={_items => _items.id}
             numColumns={3}
             renderItem={({ item }) => (
               <CustomPickerItemWithIcon
-                _text={item.label}
+                _text={item.name}
                 _onPress={() => {
                   setModalVisible(false);
-                  setCategory(item.label);
+                  setCategory(item.name);
                   setIcon(item.icon);
                 }}
                 _icon={item.icon}
-                _backgroundColor={colors.mainLight}
+                _backgroundColor={item.backgroundColor}
               ></CustomPickerItemWithIcon>
             )}
             ItemSeparatorComponent={() => {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   input: {
     margin: 0,
-    color: colors.dim,
+    color: colors.mainDark,
     flex: 1,
     fontSize: 12,
     fontWeight: "normal",

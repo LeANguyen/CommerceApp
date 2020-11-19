@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   registerContainer: {
     position: "absolute",
-    bottom: 20,
+    bottom: 0,
     width: "100%",
     justifyContent: "flex-end",
     alignItems: "stretch",

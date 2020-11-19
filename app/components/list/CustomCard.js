@@ -11,14 +11,12 @@ import ReadMore from "@fawazahmed/react-native-read-more";
 import CustomIcon from "../CustomIcon";
 import { Image } from "react-native-expo-image-cache";
 
-const test_text1 =
-  "facebook.github.io/react-native/docs/text#numberoflines. That should work, unless you have a very specific use case. And by the way, if you can share any specific example or code, that would really help";
-const test_text2 =
+const test_text =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
-function CustomCard({ _item, _style }) {
+function CustomCard({ _item, _style, _onPress }) {
   return (
-    <View style={[styles.container, _style]}>
+    <TouchableOpacity style={[styles.container, _style]} onPress={_onPress}>
       <Image
         style={styles.image}
         tint="light"
@@ -79,10 +77,10 @@ function CustomCard({ _item, _style }) {
           seeMoreStyle={styles.seeMoreLess}
           seeLessStyle={styles.seeMoreLess}
         >
-          {_item.description}
+          {test_text}
         </ReadMore>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
