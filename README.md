@@ -12,4 +12,4 @@
 - Open the project in terminal and run "npm install" to install all packages.
 - Run "expo start" in the terminal to run the Expo DevTool.
 - The app QR code will be displayed in the terminal.
-- Open the expo and scan the QR code displayed in the terminal.
+- Open the Expo app and scan the QR code displayed in the terminal.
