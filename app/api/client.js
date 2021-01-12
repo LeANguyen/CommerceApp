@@ -6,7 +6,8 @@ import { log } from "react-native-reanimated";
 const apiClient = create({
   // 192.168.5.102 - Home
   // 10.247.201.219 - School
-  baseURL: "http://192.168.5.102:9000/api"
+  // baseURL: "http://192.168.5.106:9000/api"
+  baseURL: "https://commerce-app-backend.herokuapp.com/api"
 });
 
 apiClient.addAsyncRequestTransform(async request => {

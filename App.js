@@ -192,28 +192,28 @@ export default function App() {
     );
   }
 
-  // return (
-  //   // <NavigationContainer>
-  //   //   <StackNavigator></StackNavigator>
-  //   // </NavigationContainer>
+  return (
+    // <NavigationContainer>
+    //   <StackNavigator></StackNavigator>
+    // </NavigationContainer>
 
-  //   // <NavigationContainer>
-  //   //   <MyTabs></MyTabs>
-  //   // </NavigationContainer>
+    // <NavigationContainer>
+    //   <MyTabs></MyTabs>
+    // </NavigationContainer>
 
-  //   <AuthContext.Provider value={{ user, setUser }}>
-  //     <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-  //       {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
-  //     </NavigationContainer>
-  //   </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+        {user ? <AppNavigator></AppNavigator> : <AuthNavigator></AuthNavigator>}
+      </NavigationContainer>
+    </AuthContext.Provider>
 
-  //   // <>
-  //   //   <OfflineNotice></OfflineNotice>
-  //   //   <NavigationContainer>
-  //   //     <AppNavigator></AppNavigator>
-  //   //   </NavigationContainer>
-  //   // </>
-  // );
+    // <>
+    //   <OfflineNotice></OfflineNotice>
+    //   <NavigationContainer>
+    //     <AppNavigator></AppNavigator>
+    //   </NavigationContainer>
+    // </>
+  );
   // return <WelcomeView></WelcomeView>;
   // return <CreateAccountView></CreateAccountView>;
   // return <CreateItemView></CreateItemView>;
@@ -224,7 +224,7 @@ export default function App() {
   // return <ListingView></ListingView>;
   // return <CountryPickerView></CountryPickerView>;
   // return <ItemTestView></ItemTestView>;
-  return <StreamDisplayView></StreamDisplayView>;
+  // return <StreamDisplayView></StreamDisplayView>;
 }
 
 const styles = StyleSheet.create({

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import WelcomView from "../views/WelcomeView";
+import WelcomeView from "../views/WelcomeView";
 import CreateAccountView from "../views/CreateAccountView";
 
 const Stack = createStackNavigator();
@@ -10,7 +10,7 @@ const AuthNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         name={"Welcome"}
-        component={WelcomView}
+        component={WelcomeView}
         options={{ headerShown: false }}
       ></Stack.Screen>
       <Stack.Screen

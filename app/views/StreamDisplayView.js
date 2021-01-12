@@ -2,13 +2,6 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import CustomViewContainer from "../components/CustomViewContainer";
 import { WebView } from "react-native-webview";
-function formatHtml() {
-  return (
-    '<html><body><img src="' +
-    this.props.mpjegUrl +
-    '" width="100%" style="background-color: white; min-height: 100%; min-width: 100%; position: fixed; top: 0; left: 0;"></body></html>'
-  );
-}
 
 function StreamDisplayView(props) {
   return (
